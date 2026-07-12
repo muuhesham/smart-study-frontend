@@ -90,6 +90,7 @@
 }
 
 .login-text {
+    padding-top: 10px;
     margin-top: 15px;
     font-size: 1.1rem;
     color: rgba(255, 255, 255, 0.5);
@@ -113,6 +114,37 @@
     color: white;
     font-size: 1.05rem;
     transition: all 0.3s ease;
+}
+
+.password-wrapper {
+    position: relative;
+    width: 100%;
+    margin-bottom: 24px;
+}
+
+.password-wrapper .password-input {
+    margin-bottom: 0;
+    padding-right: 50px;
+}
+
+.password-toggle-btn {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    transition: color 0.2s ease;
+}
+
+.password-toggle-btn:hover {
+    color: white;
 }
 
 .email-input:focus, .password-input:focus {
@@ -146,22 +178,33 @@
     transform: translateY(1px);
     box-shadow: 0 4px 15px rgba(29, 158, 117, 0.3);
 }
+
 .register-text{
-    margin-top: 10px;
-    color:white;
-
-
+    padding-top: 20px;
+    color:rgb(161, 159, 159);
 }
+
+.forgetPassword-text{
+    color:rgb(142, 142, 142);
+}
+
 .register {
-    margin-top: 10px;
+    margin-top: 0px;
     margin-left: 5px;
     font-weight: bold;
     text-decoration: underline;
 }
 .register:hover {
-
     cursor: pointer;
     color: aquamarine;
-
-
 }
+
+.forgetPassword {
+    font-weight: bold;
+    text-decoration: underline;
+}
+.forgetPassword:hover {
+    cursor: pointer;
+    color: aquamarine;
+}
+

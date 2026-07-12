@@ -36,7 +36,6 @@
 
 .register-box {
     width: 100%;
-    padding: 40px 20px;
     background-color: #1e1e24;
     display: flex;
     flex-direction: column;
@@ -54,24 +53,13 @@
     }
 }
 
-.register-title {
-    font-size: clamp(2rem, 4vw, 3rem);
-    font-weight: 800;
-    color: white;
-    margin: 0 0 10px 0;
-    letter-spacing: -0.5px;
-}
-.register-text {
-    font-size: 1.1rem;
-    color: rgba(255, 255, 255, 0.5);
-    margin: 0 0 40px 0;
-}
 .re-password-text {
     font-size: 1rem;
     font-weight: 600;
     color: rgba(255, 255, 255, 0.8);
     margin: 0 0 10px 0;
 }
+
 .re-password-input {
     width: 100%;
     padding: 16px 20px;
@@ -82,6 +70,38 @@
     color: white;
     font-size: 1.05rem;
     transition: all 0.3s ease;
+}
+
+.password-wrapper {
+    position: relative;
+    width: 100%;
+    margin-bottom: 24px;
+}
+
+.password-wrapper .password-input, 
+.password-wrapper .re-password-input {
+    margin-bottom: 0;
+    padding-right: 50px;
+}
+
+.password-toggle-btn {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    transition: color 0.2s ease;
+}
+
+.password-toggle-btn:hover {
+    color: white;
 }
 .register-btn {
     width: 100%;
@@ -119,6 +139,7 @@
     font-weight: 600;
     color: rgba(255, 255, 255, 0.8);
     margin: 0 0 10px 0;
+    padding-top: 30px;
 }
 .name-input {
     width: 100%;
