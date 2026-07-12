@@ -1,14 +1,22 @@
 .login-container {
     display: flex;
-    height: 100vh;
-    width: 100vw;
-    overflow: hidden;
+    flex-direction: column;
+    min-height: 100dvh;
+    width: 100%;
     font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
 }
 
+@media (min-width: 768px) {
+    .login-container {
+        flex-direction: row;
+        height: 100dvh;
+        overflow: hidden;
+    }
+}
+
 .hero {
-    width: 50%;
-    height: 100%;
+    width: 100%;
+    padding: 40px 20px;
     background: linear-gradient(135deg, rgb(29, 158, 117) 0%, rgb(18, 110, 80) 100%);
     display: flex;
     flex-direction: column;
@@ -16,6 +24,14 @@
     align-items: center;
     position: relative;
     color: white;
+}
+
+@media (min-width: 768px) {
+    .hero {
+        width: 50%;
+        height: 100%;
+        padding: 0;
+    }
 }
 
 .hero-logo {
@@ -31,7 +47,7 @@
 }
 
 .hero-title {
-    font-size: 4rem;
+    font-size: clamp(2rem, 5vw, 4rem);
     font-weight: 800;
     margin: 0;
     text-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
@@ -39,7 +55,7 @@
 }
 
 .hero-text {
-    font-size: 1.8rem;
+    font-size: clamp(1rem, 2vw, 1.8rem);
     font-weight: 500;
     margin: 0;
     opacity: 0.9;
@@ -47,19 +63,26 @@
 }
 
 .login-box {
-    width: 50%;
-    height: 100%;
+    width: 100%;
+    padding: 40px 20px;
     background-color: #1e1e24;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 0 12%;
-    box-shadow: -10px 0 40px rgba(0, 0, 0, 0.3);
-    z-index: 10;
+}
+
+@media (min-width: 768px) {
+    .login-box {
+        width: 50%;
+        height: 100%;
+        padding: 0 12%;
+        box-shadow: -10px 0 40px rgba(0, 0, 0, 0.3);
+        z-index: 10;
+    }
 }
 
 .login-title {
-    font-size: 3rem;
+    font-size: clamp(2rem, 4vw, 3rem);
     font-weight: 800;
     color: white;
     margin: 0 0 10px 0;

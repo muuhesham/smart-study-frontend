@@ -154,3 +154,45 @@
 .logout-btn:hover {
     background-color: rgba(255, 0, 0, 0.08);
 }
+
+/* Responsive sidebar drawer styles */
+.nav-close-btn {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 280px;
+        height: 100vh;
+        z-index: 1002;
+        transform: translateX(-100%);
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 4px 0 25px rgba(0, 0, 0, 0.5);
+    }
+
+    .navbar.open {
+        transform: translateX(0);
+    }
+
+    .nav-close-btn {
+        display: flex;
+        margin-left: auto;
+        background: none;
+        border: none;
+        color: #8b8b9b;
+        cursor: pointer;
+        align-items: center;
+        justify-content: center;
+        padding: 6px;
+        border-radius: 8px;
+        transition: all 0.2s ease;
+    }
+
+    .nav-close-btn:hover {
+        color: white;
+        background-color: rgba(255, 255, 255, 0.05);
+    }
+}

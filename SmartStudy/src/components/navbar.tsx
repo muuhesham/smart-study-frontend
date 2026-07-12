@@ -7,11 +7,16 @@ import dashboard from "../assets/dashboard.png";
 import subjects from "../assets/book.png";
 import studyplan from "../assets/task.png";
 import profile from "../assets/profile.png";
-import { LogOut } from "lucide-react";
+import { LogOut, X } from "lucide-react";
 import axios from "axios";
 import { backendUrl } from "../constants/backendUrl";
 
-function Navbar() {
+interface NavbarProps {
+    isOpen?: boolean;
+    onClose?: () => void;
+}
+
+function Navbar({ isOpen, onClose }: NavbarProps) {
     const navigate = useNavigate();
     const [activeItem, setActiveItem] = useState("");
 
@@ -37,10 +42,15 @@ function Navbar() {
     };
 
     return (
-        <div className="navbar">
+        <div className={`navbar ${isOpen ? "open" : ""}`}>
             <div className="nav-header-container">
                 <img className="nav-logo" src={logo} alt="" />
                 <h1 className="nav-header">SmartStudy</h1>
+                {onClose && (
+                    <button className="nav-close-btn" onClick={onClose} aria-label="Close sidebar">
+                        <X size={20} />
+                    </button>
+                )}
             </div>
 
             <div className="nav-list">
@@ -52,6 +62,7 @@ function Navbar() {
                         onClick={() => {
                             setActiveItem("Dashboard");
                             navigate("/dashboard");
+                            onClose?.();
                         }}
                     >
                         <img src={dashboard} alt="" />
@@ -63,6 +74,7 @@ function Navbar() {
                         onClick={() => {
                             setActiveItem("subjects");
                             navigate("/subjects");
+                            onClose?.();
                         }}
                     >
                         <img src={subjects} alt="" />
@@ -74,6 +86,7 @@ function Navbar() {
                         onClick={() => {
                             setActiveItem("Study Plan");
                             navigate("/studyplan");
+                            onClose?.();
                         }}
                     >
                         <img src={studyplan} alt="" />
@@ -85,6 +98,7 @@ function Navbar() {
                         onClick={() => {
                             setActiveItem("Pomodoro Timer");
                             navigate("/pomodorotimer");
+                            onClose?.();
                         }}
                     >
                         <img src={pomodoro} alt="" />
@@ -95,7 +109,10 @@ function Navbar() {
 
             <div
     className="profile"
-    onClick={() => navigate("/profile")}
+    onClick={() => {
+        navigate("/profile");
+        onClose?.();
+    }}
 >
     <img
         src={profile}
@@ -108,7 +125,10 @@ function Navbar() {
     </p>
 </div>
 
-            <div className="logout-btn" onClick={handleLogout}>
+            <div className="logout-btn" onClick={() => {
+                handleLogout();
+                onClose?.();
+            }}>
                 <LogOut size={20} />
                 <span>Logout</span>
             </div>

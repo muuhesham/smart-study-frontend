@@ -1,43 +1,78 @@
-.register-container{
-  display: flex;
-    height: 100vh;
-    width: 100vw;
-    overflow: hidden;
-    font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;   
+.register-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100dvh;
+    width: 100%;
+    font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
 }
-.register-box{
-    width: 50%;
-    height: 100%;
+
+@media (min-width: 768px) {
+    .register-container {
+        flex-direction: row;
+        height: 100dvh;
+        overflow: hidden;
+    }
+}
+
+.hero {
+    width: 100%;
+    padding: 40px 20px;
+    background: linear-gradient(135deg, rgb(29, 158, 117) 0%, rgb(18, 110, 80) 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    color: white;
+}
+
+@media (min-width: 768px) {
+    .hero {
+        width: 50%;
+        height: 100%;
+        padding: 0;
+    }
+}
+
+.register-box {
+    width: 100%;
+    padding: 40px 20px;
     background-color: #1e1e24;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 0 12%;
-    box-shadow: -10px 0 40px rgba(0, 0, 0, 0.3);
-    z-index: 10;
 }
- 
 
+@media (min-width: 768px) {
+    .register-box {
+        width: 50%;
+        height: 100%;
+        padding: 0 12%;
+        box-shadow: -10px 0 40px rgba(0, 0, 0, 0.3);
+        z-index: 10;
+        overflow-y: auto;
+    }
+}
 
-.register-title{
-    font-size: 3rem;
+.register-title {
+    font-size: clamp(2rem, 4vw, 3rem);
     font-weight: 800;
     color: white;
     margin: 0 0 10px 0;
     letter-spacing: -0.5px;
 }
-.register-text{
+.register-text {
     font-size: 1.1rem;
     color: rgba(255, 255, 255, 0.5);
     margin: 0 0 40px 0;
 }
-.re-password-text{
+.re-password-text {
     font-size: 1rem;
     font-weight: 600;
     color: rgba(255, 255, 255, 0.8);
     margin: 0 0 10px 0;
 }
-.re-password-input{
+.re-password-input {
     width: 100%;
     padding: 16px 20px;
     margin-bottom: 24px;
@@ -48,7 +83,7 @@
     font-size: 1.05rem;
     transition: all 0.3s ease;
 }
-.register-btn{
+.register-btn {
     width: 100%;
     padding: 18px;
     margin-top: 16px;
@@ -62,16 +97,16 @@
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     box-shadow: 0 6px 20px rgba(29, 158, 117, 0.3);
 }
-.register-btn:hover{
+.register-btn:hover {
     transform: translateY(-2px);
     box-shadow: 0 8px 25px rgba(29, 158, 117, 0.4);
 }
-.register-btn:active{
+.register-btn:active {
     transform: translateY(1px);
     box-shadow: 0 4px 15px rgba(29, 158, 117, 0.3);
 }
 
-.login{
+.login {
     margin-top: 15px;
     margin-left: 5px;
     font-weight: bold;
@@ -79,13 +114,13 @@
     cursor: pointer;
     color: aquamarine;
 }
-.name-text{
+.name-text {
     font-size: 1rem;
     font-weight: 600;
     color: rgba(255, 255, 255, 0.8);
     margin: 0 0 10px 0;
 }
-.name-input{
+.name-input {
     width: 100%;
     padding: 16px 20px;
     margin-bottom: 24px;
@@ -97,13 +132,13 @@
     transition: all 0.3s ease;
 }
 
-.study-hours-text{
+.study-hours-text {
     font-size: 1rem;
     font-weight: 600;
     color: rgba(255, 255, 255, 0.8);
     margin: 0 0 10px 0;
 }
-.Study-Time{
+.Study-Time {
     width: 100%;
     padding: 16px 20px;
     margin-bottom: 24px;
@@ -114,4 +149,3 @@
     font-size: 1.05rem;
     transition: all 0.3s ease;
 }
-

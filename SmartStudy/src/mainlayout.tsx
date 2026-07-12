@@ -1,25 +1,49 @@
+import { useState } from "react";
 import { Outlet } from "react-router";
 import Navbar from "./components/navbar";
+import { Menu } from "lucide-react";
+import logo from "./assets/logo.png";
+import "./mainlayout.css";
 
 function Mainlayout() {
-  return (
-    <div
-      style={{
-        display: "grid",
-        gridTemplateColumns: "280px 1fr",
-        minHeight: "100vh",
-        background: "#121214",
-      }}
-    >
-      <Navbar />
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-      <main
-        style={{
-          padding: "50px 60px 60px 50px",   // زيادة padding من كل الجهات
-          overflowY: "auto",
-          maxWidth: "100%",
-        }}
-      >
+  const toggleSidebar = () => {
+    setIsSidebarOpen((prev) => !prev);
+  };
+
+  const closeSidebar = () => {
+    setIsSidebarOpen(false);
+  };
+
+  return (
+    <div className="main-layout-container">
+      {/* Mobile top header */}
+      <header className="mobile-header">
+        <div className="mobile-header-brand">
+          <img src={logo} alt="SmartStudy logo" className="mobile-header-logo" />
+          <h1 className="mobile-header-title">SmartStudy</h1>
+        </div>
+        <button
+          className="hamburger-btn"
+          onClick={toggleSidebar}
+          aria-label="Toggle navigation menu"
+        >
+          <Menu size={24} />
+        </button>
+      </header>
+
+      {/* Sidebar Navigation */}
+      <Navbar isOpen={isSidebarOpen} onClose={closeSidebar} />
+
+      {/* Overlay backdrop for mobile */}
+      <div
+        className={`sidebar-backdrop ${isSidebarOpen ? "visible" : ""}`}
+        onClick={closeSidebar}
+      />
+
+      {/* Main Content Area */}
+      <main className="main-content">
         <Outlet />
       </main>
     </div>
