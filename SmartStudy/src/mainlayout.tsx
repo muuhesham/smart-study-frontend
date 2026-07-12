@@ -1,17 +1,16 @@
 import { useState } from "react";
-import { Outlet } from "react-router";
+import { Outlet, useNavigate } from "react-router";
 import Navbar from "./components/navbar";
-import { Menu } from "lucide-react";
+import { Menu, HelpCircle } from "lucide-react";
 import logo from "./assets/logo.png";
 import "./mainlayout.css";
 
 function Mainlayout() {
+  const navigate = useNavigate();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-
   const toggleSidebar = () => {
     setIsSidebarOpen((prev) => !prev);
   };
-
   const closeSidebar = () => {
     setIsSidebarOpen(false);
   };
@@ -46,6 +45,16 @@ function Mainlayout() {
       <main className="main-content">
         <Outlet />
       </main>
+
+      <div className="fixed bottom-6 right-6 z-50">
+        <button
+          onClick={() => navigate("/support")}
+          className="w-12 h-12 bg-[#5d5fef] hover:bg-[#4e4faf] text-white rounded-full shadow-xl flex items-center justify-center transition-all transform hover:scale-110 active:scale-95"
+          title="Support"
+        >
+          <HelpCircle size={24} />
+        </button>
+      </div>
     </div>
   );
 }

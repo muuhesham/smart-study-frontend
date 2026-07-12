@@ -3,6 +3,8 @@ import axios from 'axios';
 import { ArrowUpRight,  BookOpen, CheckCircle2, Flame, Plus, Timer } from 'lucide-react';
 import { backendUrl } from '../../constants/backendUrl';
 import CompletionDonutChart from '../../components/CompletionDonutChart';
+import toast from 'react-hot-toast';
+import { Navigate, useNavigate } from 'react-router';
 
 interface WeeklyHoursEntry {
   day: string;
@@ -55,11 +57,15 @@ export default function DashboardView() {
   const [data, setData] = useState<DashboardData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const token = localStorage.getItem('auth');
     if (!token) {
-      setError('You are not logged in.');
+      toast.error(`You aren't logged in. Return to Login Page!`);
+      setTimeout(() => {
+        navigate('/');
+      }, 3000);
       setLoading(false);
       return;
     }
