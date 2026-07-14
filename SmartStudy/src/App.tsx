@@ -1,16 +1,15 @@
 import { Routes, Route, BrowserRouter } from 'react-router'
-import Login from './Pages/Login/login'
-import Register from './Pages/Register/register'
-import ForgotPassword from './Pages/ForgotPassword/forgotpassword'
+import Login from './pages/Login/login'
+import Register from './pages/Register/register'
+import ForgotPassword from './pages/ForgotPassword/forgotpassword'
 import Mainlayout from './mainlayout'
-import Support from './Pages/Support/support'
+import Support from './pages/Support/support'
 import { Toaster } from 'react-hot-toast'
-import './App.css'
-import Dashboard from './Pages/Dashboard/dashboard'
-import Subjects from './Pages/Subjects/subjects'
-import Studyplan from './Pages/StudyPlan/studyplan'
-import Pomodoro from './Pages/Pomodoro/pomodoro'
-import Profile from "./Pages/Profile/profile";
+import Dashboard from './pages/Dashboard/dashboard'
+import Subjects from './pages/Subjects/subjects'
+import Studyplan from './pages/StudyPlan/studyplan'
+import Pomodoro from './pages/Pomodoro/pomodoro'
+import Profile from "./pages/Profile/profile";
 function App() {
   return (
     <BrowserRouter>

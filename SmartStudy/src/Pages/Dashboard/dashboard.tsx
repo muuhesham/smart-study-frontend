@@ -84,7 +84,7 @@ export default function DashboardView() {
       .get(`${backendUrl}/api/profile/me`, {
         headers: { Authorization: `Bearer ${token}` },
       })
-      .then((res) => setUser(res.data.data))
+      .then((res:any) => setUser(res.data.data))
       .catch(() => {
         toast.error(`Failed to load user data`);
         <Loader
@@ -99,7 +99,7 @@ export default function DashboardView() {
       .get(`${backendUrl}/api/dashboard`, {
         headers: { Authorization: `Bearer ${token}` },
       })
-      .then((res) => setData(res.data.data))
+      .then((res:any) => setData(res.data.data))
       .catch(() => {
         toast.error(`Failed to load dashboard`);
         <Loader
