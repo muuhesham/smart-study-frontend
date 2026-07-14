@@ -167,13 +167,15 @@ export default function DashboardView() {
   ].map((n) => Math.round(n));
 
   return (
-    <div className="text-slate-100 flex flex-col items-center justify-start selection:bg-emerald-500/30 font-sans">
+    <div
+      className="text-slate-100 flex flex-col items-center justify-start selection:bg-emerald-500/30 font-sans">
       <div
         className="w-full max-w-8xl mx-auto px-6 py-10 space-y-12"
         style={{
           display: "flex",
           flexDirection: "column",
           gap: "20px",
+          minHeight: "auto",
         }}
       >
         {/* Header Section */}
@@ -193,7 +195,7 @@ export default function DashboardView() {
             className="group flex items-center justify-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white px-6 py-3.5 rounded-xl text-sm font-bold transition-all duration-200 active:scale-95 shadow-lg shadow-emerald-500/20"
             onClick={() => navigate("/studyplan")}
             style={{
-              padding: "8px"
+              padding: "8px",
             }}
           >
             <Plus className="h-6 w-6 transition-transform duration-200" />

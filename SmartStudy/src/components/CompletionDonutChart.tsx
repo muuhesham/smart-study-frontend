@@ -82,7 +82,6 @@ export default function CompletionDonutChart({ subjects }: CompletionDonutChartP
             </svg>
             <div className="absolute inset-0 flex flex-col items-center justify-center">
               <span className="text-4xl font-bold text-white">{overallAverage}%</span>
-              <span className="text-sm text-zinc-500 mt-1">average completion</span>
             </div>
           </div>
 

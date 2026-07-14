@@ -8,7 +8,7 @@ import subjects from "../assets/book.png";
 import studyplan from "../assets/task.png";
 import profile from "../assets/profile.png";
 import { LogOut, X } from "lucide-react";
-import axios from "axios";
+import api from '../services/axios';
 import { backendUrl } from "../constants/backendUrl";
 import toast from "react-hot-toast";
 
@@ -35,20 +35,19 @@ function Navbar({ isOpen, onClose }: NavbarProps) {
       return;
     }
 
-    axios
+    api
       .get(`${backendUrl}/api/profile/me`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => setUser(res.data.data))
-      .catch((err) => {
+      .catch(() => {
         toast.error(`Failed to load user data`);
-        console.error("Failed to load user data", err);
       })
     }, [user]);
 
     const handleLogout = async () => {
         try {
-            await axios.post(
+            await api.post(
                 `${backendUrl}/api/logout`,
                 {},
                 {

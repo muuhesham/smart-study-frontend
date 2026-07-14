@@ -1,7 +1,10 @@
 import { useState, useEffect } from "react"
-import axios from "axios"
+import api from '../../services/axios';
 import "./subjects.css"
 import { backendUrl } from "../../constants/backendUrl"
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router";
+import { Loader } from 'lucide-react';
 
 interface Subject {
     _id: string
@@ -30,6 +33,7 @@ function Subjects() {
     const [subjects, setSubjects] = useState<Subject[]>([]);
     const [loading, setLoading] = useState(true);
     const [editingId, setEditingId] = useState<string | null>(null)
+    const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
         name: "",
@@ -46,7 +50,7 @@ function Subjects() {
             setLoading(false);
             return;
         }
-        axios
+        api
             .get(`${backendUrl}/api/subject`, {
                 headers: { Authorization: `Bearer ${token}` },
             })
@@ -71,13 +75,14 @@ function Subjects() {
         e.preventDefault()
 
         if (!formData.name || !formData.examDate || !formData.hoursPerWeek) {
-            alert("Please fill all fields")
-            return
+            toast.error(`Please fill all fields`);
+            return;
         }
 
         const token = getToken();
         if (!token) {
-            alert("You are not logged in.");
+            toast.error(`You are not logged in. Login First`);
+            navigate('/');
             return;
         }
 
@@ -90,20 +95,20 @@ function Subjects() {
 
         try {
             if (editingId) {
-                await axios.patch(`${backendUrl}/api/subject/${editingId}`, payload, {
+                await api.patch(`${backendUrl}/api/subject/${editingId}`, payload, {
                     headers: { Authorization: `Bearer ${token}` },
                 });
                 setEditingId(null);
             } else {
-                await axios.post(`${backendUrl}/api/subject`, payload, {
+                await api.post(`${backendUrl}/api/subject`, payload, {
                     headers: { Authorization: `Bearer ${token}` },
                 });
             }
             setFormData({ name: "", difficulty: "MEDIUM", examDate: "", hoursPerWeek: "" });
             fetchSubjects();
+            toast.success(`Subject ${payload?.name} Added Successfully!`);
         } catch (err) {
-            console.error("Failed to save subject", err);
-            alert("Could not save subject. Please try again.");
+            toast.error(`Could not save subject. Please try again.`);
         }
     }
 
@@ -111,14 +116,13 @@ function Subjects() {
         const token = getToken();
         if (!token) return;
         try {
-            await axios.delete(`${backendUrl}/api/subject/${id}`, {
+            await api.delete(`${backendUrl}/api/subject/${id}`, {
                 headers: { Authorization: `Bearer ${token}` },
             });
             if (editingId === id) handleCancelEdit();
             fetchSubjects();
         } catch (err) {
-            console.error("Failed to delete subject", err);
-            alert("Could not delete subject. Please try again.");
+            toast.error(`Could not delete subject. Please try again.`);
         }
     }
 
@@ -142,122 +146,139 @@ function Subjects() {
         const label = NUMBER_TO_DIFFICULTY(difficulty);
         switch (label) {
             case "EASY":
-                return "#22b98911"
+                return "#00ffaec6"
             case "MEDIUM":
-                return "#ffd10011"
+                return "#ffd000d2"
             case "HARD":
-                return "#ff666611"
+                return "#e90404cf"
             default:
                 return "#22b98911"
         }
     }
 
     return (
-        <div className="subjects-container">
-            <h1 className="subjects-title">Subjects</h1>
-            <p className="subjects-description">
-                Add the courses you need to study. Set difficulty, exam date and weekly hours
-                so the planner can prioritise correctly.
-            </p>
+      <div className="subjects-container">
+        <h1 className="subjects-title">Subjects</h1>
+        <p className="subjects-description">
+          Add the courses you need to study. Set difficulty, exam date and
+          weekly hours so the planner can prioritise correctly.
+        </p>
 
-            <form className="subjects-form" onSubmit={handleAddSubject}>
-                <div className="form-row">
-                    <input
-                        type="text"
-                        name="name"
-                        placeholder="Subject Name"
-                        value={formData.name}
-                        onChange={handleInputChange}
-                        className="form-input"
-                    />
+        <form className="subjects-form" onSubmit={handleAddSubject}>
+          <div className="form-row">
+            <input
+              type="text"
+              name="name"
+              placeholder="Subject Name"
+              value={formData.name}
+              onChange={handleInputChange}
+              className="form-input"
+            />
 
-                    <select
-                        name="difficulty"
-                        value={formData.difficulty}
-                        onChange={handleInputChange}
-                        className="form-input"
-                    >
-                        <option value="EASY">Easy</option>
-                        <option value="MEDIUM">Medium</option>
-                        <option value="HARD">Hard</option>
-                    </select>
+            <select
+              name="difficulty"
+              value={formData.difficulty}
+              onChange={handleInputChange}
+              className="form-input"
+            >
+              <option value="EASY">Easy</option>
+              <option value="MEDIUM">Medium</option>
+              <option value="HARD">Hard</option>
+            </select>
 
-                    <input
-                        type="date"
-                        name="examDate"
-                        value={formData.examDate}
-                        onChange={handleInputChange}
-                        className="form-input"
-                        min={getLocalDateString()}
-                    />
+            <input
+              type="date"
+              name="examDate"
+              value={formData.examDate}
+              onChange={handleInputChange}
+              className="form-input"
+              min={getLocalDateString()}
+            />
 
-                    <input
-                        type="number"
-                        name="hoursPerWeek"
-                        placeholder="Hours per week"
-                        value={formData.hoursPerWeek}
-                        onChange={handleInputChange}
-                        className="form-input"
-                    />
+            <input
+              type="number"
+              name="hoursPerWeek"
+              placeholder="Hours per week"
+              value={formData.hoursPerWeek}
+              onChange={handleInputChange}
+              className="form-input"
+            />
 
-                    <button type="submit" className="add-subject-btn">
-                        {editingId ? "Update Subject" : "Add Subject"}
-                    </button>
-                    {editingId && (
-                        <button type="button" className="cancel-btn" onClick={handleCancelEdit}>
-                            Cancel
-                        </button>
-                    )}
-                </div>
-            </form>
-
-            {loading ? (
-                <p style={{ color: "#a1a1aa" }}>Loading subjects...</p>
-            ) : (
-                <div className="subjects-grid">
-                    {subjects.map(subject => (
-                        <div key={subject._id} className="subject-card">
-                            <div className="card-header">
-                                <h2 className="subject-name">{subject.name}</h2>
-                                <span
-                                    className="difficulty-badge"
-                                    style={{ backgroundColor: getDifficultyColor(subject.difficulty) }}
-                                >
-                                    {NUMBER_TO_DIFFICULTY(subject.difficulty)}
-                                </span>
-                            </div>
-
-                            <div className="card-info">
-                                <div className="info-item">
-                                    <p className="info-label">EXAM</p>
-                                    <p className="info-value">{subject.examDate.split("T")[0]}</p>
-                                </div>
-                                <div className="info-item">
-                                    <p className="info-label">PER WEEK</p>
-                                    <p className="info-value">{subject.targetHoursPerWeek}h</p>
-                                </div>
-                            </div>
-
-                            <div className="card-buttons">
-                                <button
-                                    className="delete-btn"
-                                    onClick={() => handleDeleteSubject(subject._id)}
-                                >
-                                    Delete
-                                </button>
-                                <button
-                                    className="edit-btn"
-                                    onClick={() => handleEditSubject(subject)}
-                                >
-                                    Edit
-                                </button>
-                            </div>
-                        </div>
-                    ))}
-                </div>
+            <button type="submit" className="add-subject-btn">
+              {editingId ? "Update Subject" : "Add Subject"}
+            </button>
+            {editingId && (
+              <button
+                type="button"
+                className="cancel-btn"
+                onClick={handleCancelEdit}
+              >
+                Cancel
+              </button>
             )}
-        </div>
-    )
+          </div>
+        </form>
+
+        {loading ? (
+          <div className="min-h-screen w-full flex items-center justify-center">
+            <Loader
+              size={48}
+              className="animate-spin"
+              style={{ animationDuration: "0.5s" }}
+            />
+          </div>
+        ) : (
+          <div className="subjects-grid">
+            {subjects.map((subject) => (
+              <div key={subject._id} className="subject-card">
+                <div className="card-header">
+                  <h2 className="subject-name">{subject.name}</h2>
+                  <span
+                    className="difficulty-badge"
+                    style={{
+                      backgroundColor: getDifficultyColor(subject.difficulty),
+                    }}
+                  >
+                    {NUMBER_TO_DIFFICULTY(subject.difficulty)}
+                  </span>
+                </div>
+
+                <div className="card-info">
+                  <div className="info-item">
+                    <p className="info-label">EXAM DATE</p>
+                    <p className="info-value">
+                      {subject.examDate.split("T")[0]}
+                    </p>
+                  </div>
+                  <div className="info-item">
+                    <p className="info-label">PER WEEK</p>
+                    <p className="info-value">{subject.targetHoursPerWeek}h</p>
+                  </div>
+                </div>
+
+                <div className="card-buttons">
+                  <button
+                    className="delete-btn"
+                    onClick={() => {
+                      handleDeleteSubject(subject._id);
+                      toast.success(`Subject Deleted Successfully!`);
+                    }}
+                  >
+                    Delete
+                  </button>
+                  <button
+                    className="edit-btn"
+                    onClick={() => handleEditSubject(subject)}
+                  >
+                    Edit
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    );
 }
 
 export default Subjects

@@ -1,7 +1,6 @@
 .studyplan-container {
     width: 100%;
-    min-height: 100vh;
-    background-color: #0f0f14;
+    min-height: auto;
     color: white;
 }
 
@@ -87,7 +86,7 @@
 /* Generate Button */
 .generate-btn {
     padding: 0 32px;
-    background: linear-gradient(135deg, rgb(93, 95, 239) 0%, rgb(70, 72, 210) 100%);
+    background: linear-gradient(135deg, rgb(34, 185, 137) 0%, rgb(29, 158, 117) 100%);
     border: none;
     border-radius: 8px;
     color: white;
@@ -95,13 +94,13 @@
     font-weight: 600;
     cursor: pointer;
     transition: all 0.2s ease;
-    box-shadow: 0 4px 15px rgba(93, 95, 239, 0.3);
+    box-shadow: 0 4px 15px rgba(29, 158, 117, 0.3);
     height: 48px;
 }
 
 .generate-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(93, 95, 239, 0.4);
+    box-shadow: 0 6px 20px rgba(29, 158, 117, 0.4);
 }
 
 .generate-btn:active {
