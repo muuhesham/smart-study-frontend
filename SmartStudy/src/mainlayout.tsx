@@ -20,7 +20,11 @@ function Mainlayout() {
       {/* Mobile top header */}
       <header className="mobile-header">
         <div className="mobile-header-brand">
-          <img src={logo} alt="SmartStudy logo" className="mobile-header-logo" />
+          <img
+            src={logo}
+            alt="SmartStudy logo"
+            className="mobile-header-logo"
+          />
           <h1 className="mobile-header-title">SmartStudy</h1>
         </div>
         <button
@@ -49,7 +53,7 @@ function Mainlayout() {
       <div className="fixed bottom-6 right-6 z-50">
         <button
           onClick={() => navigate("/support")}
-          className="w-12 h-12 bg-[#5d5fef] hover:bg-[#4e4faf] text-white rounded-full shadow-xl flex items-center justify-center transition-all transform hover:scale-110 active:scale-95"
+          className="w-10 h-10 bg-[#10b981] hover:bg-[#059669] text-white rounded-full shadow-xl flex items-center justify-center transition-all transform hover:scale-110 active:scale-95"
           title="Support"
         >
           <HelpCircle size={24} />

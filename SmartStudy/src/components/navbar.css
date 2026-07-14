@@ -1,7 +1,7 @@
 .navbar {
     background-color: #16161d;
     width: 100%;
-    height: 100vh;
+    height: auto;
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
@@ -44,7 +44,7 @@
 }
 
 .overview-label {
-    color: #8b8b9b;
+    color: #ffffff;
     font-family: 'Poppins', sans-serif;
     font-size: 13px;
     text-transform: uppercase;
@@ -71,7 +71,7 @@
     display: flex;
     align-items: center;
     gap: 15px;
-    color: #a0a0b0;
+    color: #d7d7ea;
     cursor: pointer;
     transition: all 0.3s ease;
 }

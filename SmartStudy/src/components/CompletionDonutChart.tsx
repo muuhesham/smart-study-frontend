@@ -44,11 +44,14 @@ export default function CompletionDonutChart({ subjects }: CompletionDonutChartP
     : 0;
 
   return (
-    <div className="bg-[#1c1c1e] border border-zinc-800 rounded-3xl p-8 mt-8">
+    <div>
       <h2 className="font-display font-bold text-xl text-white mb-8">Completion by subject</h2>
 
       {subjects.length === 0 ? (
-        <div className="flex flex-col items-center justify-center py-16 text-center">
+        <div className="flex flex-col items-center justify-center  text-center"
+        style={{
+          marginTop: "30px"
+        }}>
           <p className="text-zinc-500">No subjects yet</p>
         </div>
       ) : (

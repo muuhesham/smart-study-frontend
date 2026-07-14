@@ -2,7 +2,7 @@ import './login.css'
 import logo from "../../assets/logo.png"
 import { backendUrl } from "../../constants/backendUrl"
 import { useState } from "react"
-import axios from "axios"
+import api from '../../services/axios';
 import { useNavigate } from 'react-router'
 import { Eye, EyeOff, HelpCircle } from 'lucide-react'
 import toast from 'react-hot-toast'
@@ -13,13 +13,14 @@ function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
-    const handleLogIn = async () => {
+    const handleLogIn = async (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
         if (!email || !password) {
             toast.error("All fields are required");
             return;
         }
         try {
-            const response = await axios.post(`${backendUrl}/api/login`, { email, password })
+            const response = await api.post(`${backendUrl}/api/login`, { email, password })
             if (response.data && response.data.data.token) {
                 toast.success(`Welcome back ${response.data.data.user.name}!`);
                 navigate("/dashboard")
@@ -43,7 +44,7 @@ function Login() {
           </div>
           <p className="hero-text">Study Smarter, Not Harder</p>
         </div>
-        <div className="login-box">
+        <form className="login-box" onSubmit={handleLogIn}>
           <h1 className="login-title">Welcome Back !</h1>
           <p className="login-text">Sign in into your account</p>
           <p className="email-text">Email</p>
@@ -70,7 +71,7 @@ function Login() {
               {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
             </button>
           </div>
-          <button onClick={handleLogIn} className="login-btn">
+          <button type="submit" className="login-btn" >
             Login
           </button>
           <p className="register-text">
@@ -82,7 +83,7 @@ function Login() {
               Forget your password?
             </p>
           </p>
-        </div>
+        </form>
         <div className="fixed bottom-5 right-5 z-50">
           <button
             id="helpBtn"

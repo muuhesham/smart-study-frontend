@@ -18,7 +18,8 @@ function Register() {
   const [showPassword, setShowPassword] = useState(false);
   const [showRePassword, setShowRePassword] = useState(false);
 
-  const handleRegister = async () => {
+  const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     if (!name || !email || !password || !rePassword || !studyTime) {
       toast.error("All fields are required");
       return;
@@ -57,7 +58,7 @@ function Register() {
         <p className="hero-text">Study Smarter, Not Harder</p>
       </div>
 
-      <div className="register-box">
+      <form className="register-box" onSubmit={handleRegister}>
         <p className="name-text">Name</p>
         <input
           type="text"
@@ -126,7 +127,7 @@ function Register() {
           onChange={(e) => setStudyTime(e.target.value)}
         />
 
-        <button onClick={handleRegister} className="register-btn">
+        <button type="submit" className="register-btn">
           Register
         </button>
         <p className="login-text">
@@ -135,7 +136,7 @@ function Register() {
             Login
           </span>{" "}
         </p>
-      </div>
+      </form>
       <div className="fixed bottom-5 right-5 z-50">
         <button
           id="helpBtn"
