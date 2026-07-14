@@ -5,6 +5,7 @@ import "./studyplan.css";
 import { backendUrl } from "../../constants/backendUrl";
 import toast from "react-hot-toast";
 import { Loader } from "lucide-react";
+import Breadcrumbs from "../../components/Breadcrumbs";
 
 interface PlanTask {
   _id: string;
@@ -151,6 +152,7 @@ function Studyplan() {
 
   return (
     <div className="studyplan-container">
+      <Breadcrumbs/>
       <h1 className="studyplan-title">Study Plan</h1>
       <p className="studyplan-description">
         Generate a personalised 7-day schedule based on your subjects, exam

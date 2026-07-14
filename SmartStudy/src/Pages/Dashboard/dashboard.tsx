@@ -6,13 +6,14 @@ import {
   Flame,
   Plus,
   Timer,
-  Loader
+  Loader,
 } from "lucide-react";
 import { backendUrl } from "../../constants/backendUrl";
 import CompletionDonutChart from "../../components/CompletionDonutChart";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router";
-import api from '../../services/axios';
+import api from "../../services/axios";
+import Breadcrumbs from "../../components/Breadcrumbs";
 
 interface WeeklyHoursEntry {
   day: string;
@@ -167,8 +168,7 @@ export default function DashboardView() {
   ].map((n) => Math.round(n));
 
   return (
-    <div
-      className="text-slate-100 flex flex-col items-center justify-start selection:bg-emerald-500/30 font-sans">
+    <div className="text-slate-100 flex flex-col items-center justify-start selection:bg-emerald-500/30 font-sans">
       <div
         className="w-full max-w-8xl mx-auto px-6 py-10 space-y-12"
         style={{
@@ -177,7 +177,8 @@ export default function DashboardView() {
           gap: "20px",
           minHeight: "auto",
         }}
-      >
+        >
+        <Breadcrumbs/>
         {/* Header Section */}
         <header className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6 pb-4 border-b border-slate-800/40">
           <div className="space-y-5">

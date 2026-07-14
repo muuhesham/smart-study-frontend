@@ -5,6 +5,7 @@ import { backendUrl } from "../../constants/backendUrl"
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router";
 import { Loader } from 'lucide-react';
+import Breadcrumbs from "../../components/Breadcrumbs";
 
 interface Subject {
     _id: string
@@ -158,6 +159,7 @@ function Subjects() {
 
     return (
       <div className="subjects-container">
+        <Breadcrumbs/>
         <h1 className="subjects-title">Subjects</h1>
         <p className="subjects-description">
           Add the courses you need to study. Set difficulty, exam date and
