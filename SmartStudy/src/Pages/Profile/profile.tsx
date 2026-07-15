@@ -1,8 +1,10 @@
 import "./profile.css";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import api from '../../services/axios'
 import { backendUrl } from "../../constants/backendUrl";
 import { useNavigate } from "react-router";
+import toast from "react-hot-toast";
+import profile from '../../assets/profile.png';
 
 function Profile() {
     const navigate = useNavigate();
@@ -23,7 +25,7 @@ function Profile() {
 
     const getProfile = async () => {
         try {
-            const response = await axios.get(
+            const response = await api.get(
                 `${backendUrl}/api/profile/me`,
                 {
                     headers: {
@@ -54,7 +56,7 @@ function Profile() {
     try {
 
         if (name !== originalName) {
-            await axios.put(
+            await api.put(
                 `${backendUrl}/api/profile/update-name`,
                 { name },
                 {
@@ -66,7 +68,7 @@ function Profile() {
         }
 
         if (email !== originalEmail) {
-            await axios.put(
+            await api.put(
                 `${backendUrl}/api/profile/update-email`,
                 { newEmail: email },
                 {
@@ -78,7 +80,7 @@ function Profile() {
         }
 
         if (dailyStudyHours !== originalHours) {
-            await axios.put(
+            await api.put(
                 `${backendUrl}/api/profile/update-daily-hours`,
                 { newDailyHours: dailyStudyHours },
                 {
@@ -88,32 +90,30 @@ function Profile() {
                 }
             );
         }
-
-        alert("Profile Updated Successfully ✅");
+        toast.success("Profile Updated Successfully ✅");
 
         getProfile();
 
     } catch (error) {
-        console.log(error);
-        alert("Update Failed");
+        toast.error("Update Failed");
     }
 };
 
     const handleChangePassword = async () => {
 
         if (!currentPassword || !newPassword || !confirmPassword) {
-            alert("Please fill all password fields");
+            toast.error("Please fill all password fields");
             return;
         }
 
         if (newPassword !== confirmPassword) {
-            alert("Passwords don't match");
+            toast.error("Passwords don't match");
             return;
         }
 
         try {
 
-            const response = await axios.put(
+            const response = await api.put(
                 `${backendUrl}/api/profile/change-password`,
                 {
                     currentPassword,
@@ -125,7 +125,8 @@ function Profile() {
                     },
                 }
             );
-
+            
+            localStorage.clear();
             localStorage.setItem(
                 "auth",
                 response.data.data.token
@@ -135,11 +136,15 @@ function Profile() {
             setNewPassword("");
             setConfirmPassword("");
 
-            alert("Password Changed Successfully ✅");
+            setTimeout(() => {
+                toast.success("Password Changed Successfully ✅");
+            }, 2000);
+
+            navigate('/');
+            
 
         } catch (error) {
-            console.log(error);
-            alert("Failed To Change Password");
+            toast.error("Failed To Change Password");
         }
     };
 
@@ -153,7 +158,7 @@ function Profile() {
 
         try {
 
-            await axios.delete(
+            await api.delete(
                 `${backendUrl}/api/profile`,
                 {
                     headers: {
@@ -167,8 +172,7 @@ function Profile() {
             navigate("/");
 
         } catch (error) {
-            console.log(error);
-            alert("Delete Failed");
+            toast.error("Delete Failed");
         }
     };
 
@@ -181,7 +185,7 @@ function Profile() {
 
             <div className="profile-card">
 
-                <div className="profile-image"></div>
+                <div className="profile-image"><img src={profile} alt="Default Profile Picture" /></div>
 
                 <div className="profile-info">
 
@@ -223,7 +227,9 @@ function Profile() {
 
                     <hr />
 
-                    <h2>Change Password</h2>
+                    <h2 style={{
+                        fontWeight: "bolder"
+                    }}>Change Password</h2>
 
                     <div className="profile-group">
                         <label>Current Password</label>
