@@ -53,7 +53,7 @@ function Studyplan() {
       .get(`${backendUrl}/api/plan`, {
         headers: { Authorization: `Bearer ${token}` },
       })
-      .then((res) => {
+      .then((res:any) => {
         if (res.data.data[0].subjectId === null) return;
         setTasks(res.data.data);
       })
