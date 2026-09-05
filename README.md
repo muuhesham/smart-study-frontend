@@ -16,6 +16,13 @@
 ---
 
 ## 📸 Snapshots
+Responsive Design <img width="1600" height="855" alt="35772cef-aa47-4961-a33f-620aafa0d5bd" src="https://github.com/user-attachments/assets/7cfc527c-e393-4195-b818-0001688dc365" />
+Dashboard Overview <img width="1600" height="836" alt="WhatsApp Image 2026-09-05 at 12 09 22 PM" src="https://github.com/user-attachments/assets/c59a1221-4022-447b-8c81-408611a2fc48" />
+Subject Management <img width="1600" height="837" alt="WhatsApp Image 2026-09-05 at 12 09 39 PM" src="https://github.com/user-attachments/assets/d3ff83bf-451b-459b-87ee-6389f8a0f01b" />
+Automated Study Plan <img width="1600" height="839" alt="WhatsApp Image 2026-09-05 at 12 09 54 PM" src="https://github.com/user-attachments/assets/8e49ed10-4b1b-4b65-a48c-bb15db5fe44b" />
+Pomodoro Timer <img width="1600" height="837" alt="WhatsApp Image 2026-09-05 at 12 10 10 PM" src="https://github.com/user-attachments/assets/7e03b8f8-fffa-4db5-8252-60f1c1b532e2" />
+
+
 
 
 ---
